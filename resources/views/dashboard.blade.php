@@ -52,22 +52,37 @@
         transform: translateX(5px);
         box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
     }
+
+    @media (max-width: 768px) {
+        /* Fuerza a las secciones a ser de una sola columna */
+        .core-process-section, 
+        .secondary-section {
+            grid-template-columns: 1fr !important; /* Una sola columna */
+            gap: 1rem !important;
+        }
+
+        /* Reducimos el tamaño del banner para que quepa en la pantalla */
+        .welcome-banner {
+            padding: 20px !important;
+        }
+        
+        .welcome-banner h1 {
+            font-size: 1.25rem !important;
+        }
+    }
 </style>
 
 <div class="container-fluid">
-    <!-- Banner de Bienvenida -->
     <div class="welcome-banner">
         <h1>¡Bienvenido, {{ Auth::user()->nombre ?? 'Usuario' }}!</h1>
         <p>Panel de Gerencia Comunitaria. Control centralizado de Mesas Técnicas de Agua (MTA) y Vocería Comunal para el desarrollo territorial.</p>
     </div>
 
-    <!-- Sección de Estadísticas (Eje Central: MTA y Voceros arriba) -->
     <div class="content-body mb-5">
          @include('dashboard-stats')
     </div> 
 
     <div class="row g-4">
-        <!-- Seguimiento de Últimas Mesas Técnicas Registradas -->
         <div class="col-md-8">
             <div class="card border-0 shadow-sm p-4" style="border-radius: 15px;">
                 <div class="d-flex justify-content-between align-items-center mb-4">
@@ -135,7 +150,6 @@
             </div>
         </div>
         
-        <!-- Enlaces Rápidos (Acceso directo al proceso central) -->
         <div class="col-md-4">
             <div class="card border-0 shadow-sm p-4 h-100" style="border-radius: 15px;">
                 <h5 class="fw-bold mb-4" style="color: var(--primary);">Procesos del Sistema</h5>
