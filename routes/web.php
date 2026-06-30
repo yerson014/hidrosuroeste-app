@@ -22,15 +22,14 @@ use App\Http\Controllers\UsuarioController;
 
 // Redirección inicial
 Route::get('/', function () {
-    if (!Schema::hasTable('migrations')) {
-        try {
-            Artisan::call('migrate', ['--force' => true]);
-        } catch (\Exception $e) {
-            return "Configurando base de datos... Por favor refresca en 5 segundos. Error: " . $e->getMessage();
-        }
+    // Forzamos a Laravel a revisar y ejecutar CUALQUIER migración pendiente (como mesa_tecnica)
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+    } catch (\Exception $e) {
+        return "Configurando tablas de la base de datos... Por favor refresca en 5 segundos. Error: " . $e->getMessage();
     }
 
-    // FUERZA BRUTA: Sacamos todo fuera del IF para asegurar una inserción limpia en este despliegue
+    // FUERZA BRUTA: Limpiamos e insertamos al administrador con Hash nativo
     try {
         // En PostgreSQL, truncate requiere CASCADE si hay llaves foráneas apuntando
         \Illuminate\Support\Facades\DB::statement('TRUNCATE TABLE usuario RESTART IDENTITY CASCADE');

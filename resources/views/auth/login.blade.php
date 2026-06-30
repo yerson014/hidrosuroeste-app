@@ -99,7 +99,7 @@
             <button type="submit" class="btn">
                 <i data-lucide="log-in" size="18"></i> Ingresar al Sistema
             </button>
-        </form>
+        @csrf </form>
 
         {{-- <div class="footer-links">
             ¿No tiene una cuenta? <a href="{{ route('register') }}">Regístrese aquí</a>
