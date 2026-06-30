@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\ParroquiaController;
@@ -92,4 +93,13 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/perfil/actualizar', [UsuarioController::class, 'updateProfile'])->name('perfil.update');
 
     Route::get('mesas-tecnicas/{id}/pdf', [App\Http\Controllers\MesaTecnicaController::class, 'generarPdf'])->name('mesas-tecnicas.pdf');
+});
+
+Route::get('/run-migrations', function () {
+    try {
+        Artisan::call('migrate', ['--force' => true]);
+        return '¡Migraciones ejecutadas con éxito! 🎉<br><pre>' . Artisan::output() . '</pre>';
+    } catch (\Exception $e) {
+        return 'Error al migrar: ' . $e->getMessage();
+    }
 });
