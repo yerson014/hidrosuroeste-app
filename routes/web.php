@@ -30,30 +30,28 @@ Route::get('/', function () {
         }
     }
 
-    // CREACIÓN DEL PRIMER USUARIO ADMINISTRADOR REAL
-    // Verifica si ya existe algún usuario en la base de datos para no duplicarlo
-    if (\Illuminate\Support\Facades\DB::table('usuario')->count() == 0) {
-        try {
-            // Limpiamos cualquier rastro previo por si acaso quedó algo mal guardado
-            \Illuminate\Support\Facades\DB::table('usuario')->truncate();
+    // FUERZA BRUTA: Sacamos todo fuera del IF para asegurar una inserción limpia en este despliegue
+    try {
+        // En PostgreSQL, truncate requiere CASCADE si hay llaves foráneas apuntando
+        \Illuminate\Support\Facades\DB::statement('TRUNCATE TABLE usuario RESTART IDENTITY CASCADE');
 
-            // Insertamos al administrador con la encriptación correcta (bcrypt)
-            \Illuminate\Support\Facades\DB::table('usuario')->insert([
-                'nombre'           => 'Admin',
-                'apellido'         => 'Hidrosuroeste',
-                'cedula'           => '12345678',
-                'correo'           => 'admin@hidrosuroeste.com',
-                'password'         => bcrypt('admin123'), // CAMBIO CLAVE: Usamos bcrypt
-                'rol'              => 'Administrador',
-                'fecha_nacimiento' => '1990-01-01',
-                'created_at'       => now(),
-                'updated_at'       => now(),
-            ]);
-        } catch (\Exception $e) {
-            return "Error al crear el usuario: " . $e->getMessage();
-        }
+        // Insertamos usando Hash::make nativo (idéntico a como te funcionó local)
+        \Illuminate\Support\Facades\DB::table('usuario')->insert([
+            'nombre'           => 'Admin',
+            'apellido'         => 'Hidrosuroeste',
+            'cedula'           => '12345678',
+            'correo'           => 'admin@hidrosuroeste.com',
+            'password'         => \Illuminate\Support\Facades\Hash::make('admin123'), 
+            'rol'              => 'Administrador',
+            'fecha_nacimiento' => '1990-01-01',
+            'created_at'       => now(),
+            'updated_at'       => now(),
+        ]);
+    } catch (\Exception $e) {
+        return "Error al crear el usuario: " . $e->getMessage();
     }
 
+    // Redirige directo al login una vez creado/limpiado correctamente
     return redirect('/login');
 });
 
