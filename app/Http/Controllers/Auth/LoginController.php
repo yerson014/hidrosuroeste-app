@@ -59,10 +59,10 @@ class LoginController extends Controller
             'nombre' => 'required|string|max:100',
             'apellido' => 'required|string|max:100',
             'cedula' => 'required|string|unique:usuario,cedula|max:20',
-            'email' => 'required|string|email|unique:usuario,correo|max:100',
+            'correo' => 'required|string|email|unique:usuario,correo|max:100',
             'password' => 'required|string|min:6|confirmed',
         ], [
-            'email.unique' => 'Este correo ya está registrado.',
+            'correo.unique' => 'Este correo ya está registrado.',
             'cedula.unique' => 'Esta cédula ya existe.',
             'password.confirmed' => 'Las contraseñas no coinciden.',
             'password.min' => 'La contraseña debe tener al menos 6 caracteres.',
@@ -72,7 +72,7 @@ class LoginController extends Controller
             'nombre' => $request->nombre,
             'apellido' => $request->apellido,
             'cedula' => $request->cedula,
-            'correo' => $request->email,
+            'correo' => $request->correo,
             'password' => Hash::make($request->password),
             'fecha_nacimiento' => $request->fecha_nacimiento,
         ]);
