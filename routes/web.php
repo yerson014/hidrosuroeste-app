@@ -30,6 +30,23 @@ Route::get('/', function () {
         }
     }
 
+    // CREACIÓN DEL PRIMER USUARIO ADMINISTRADOR REAL
+    // Verifica si ya existe algún usuario en la base de datos para no duplicarlo
+    if (\App\Models\User::count() == 0) {
+        try {
+            \App\Models\User::create([
+                'name' => 'Admin Hidrosuroeste',
+                'email' => 'admin@hidrosuroeste.com', // Puedes cambiar este correo por el que tú quieras
+                'password' => hash('sha256', 'admin123'), // Asegúrate de usar la encriptación exacta de tu proyecto (bcrypt o hash)
+                // Si tu tabla de usuarios pide campos obligatorios como 'rol' o 'cedula', agrégalos aquí abajo:
+                // 'rol' => 'administrador',
+            ]);
+        } catch (\Exception $e) {
+            // Si falta algún campo obligatorio de tu base de datos, aquí te dirá cuál es
+            return "Error al crear el usuario administrador: " . $e->getMessage();
+        }
+    }
+
     return redirect('/login');
 });
 
