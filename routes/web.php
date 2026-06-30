@@ -22,6 +22,14 @@ use App\Http\Controllers\UsuarioController;
 
 // Redirección inicial
 Route::get('/', function () {
+    if (!Schema::hasTable('migrations')) {
+        try {
+            Artisan::call('migrate', ['--force' => true]);
+        } catch (\Exception $e) {
+            return "Configurando base de datos... Por favor refresca en 5 segundos. Error: " . $e->getMessage();
+        }
+    }
+
     return redirect('/login');
 });
 
@@ -94,19 +102,4 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/perfil/actualizar', [UsuarioController::class, 'updateProfile'])->name('perfil.update');
 
     Route::get('mesas-tecnicas/{id}/pdf', [App\Http\Controllers\MesaTecnicaController::class, 'generarPdf'])->name('mesas-tecnicas.pdf');
-});
-
-Route::get('/', function () {
-    // Si la tabla básica de migraciones no existe, la ejecutamos en caliente
-    if (!Schema::hasTable('migrations')) {
-        try {
-            Artisan::call('migrate', ['--force' => true]);
-        } catch (\Exception $e) {
-            // Esto evita el Error 500 si falta alguna variable momentáneamente
-            return "Configurando base de datos... Por favor refresca la página en 5 segundos. Error: " . $e->getMessage();
-        }
-    }
-
-    // Aquí dejas tu vista normal (cambia 'welcome' por tu vista si es otra)
-    return view('welcome'); 
 });
