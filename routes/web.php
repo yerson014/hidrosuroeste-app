@@ -32,20 +32,25 @@ Route::get('/', function () {
 
     // CREACIÓN DEL PRIMER USUARIO ADMINISTRADOR REAL
     // Verifica si ya existe algún usuario en la base de datos para no duplicarlo
-    if (\App\Models\User::count() == 0) {
+    if (\Illuminate\Support\Facades\DB::table('usuario')->count() == 0) {
         try {
-            \App\Models\User::create([             
-                'nombre' => 'Admin',
-                'apellido' => 'Hidrosuroeste',
-                'cedula' => '12345678',
-                'correo' => 'admin@hidrosuroeste.com',
-                'password' => hash('sha256', 'admin123'), // Asegúrate de usar la encriptación exacta de tu proyecto (bcrypt o hash)
-                'rol' => 'Administrador',
+            // Limpiamos cualquier rastro previo por si acaso quedó algo mal guardado
+            \Illuminate\Support\Facades\DB::table('usuario')->truncate();
+
+            // Insertamos al administrador con la encriptación correcta (bcrypt)
+            \Illuminate\Support\Facades\DB::table('usuario')->insert([
+                'nombre'           => 'Admin',
+                'apellido'         => 'Hidrosuroeste',
+                'cedula'           => '12345678',
+                'correo'           => 'admin@hidrosuroeste.com',
+                'password'         => bcrypt('admin123'), // CAMBIO CLAVE: Usamos bcrypt
+                'rol'              => 'Administrador',
                 'fecha_nacimiento' => '1990-01-01',
+                'created_at'       => now(),
+                'updated_at'       => now(),
             ]);
         } catch (\Exception $e) {
-            // Si falta algún campo obligatorio de tu base de datos, aquí te dirá cuál es
-            return "Error al crear el usuario administrador: " . $e->getMessage();
+            return "Error al crear el usuario: " . $e->getMessage();
         }
     }
 
