@@ -165,6 +165,28 @@ Route::middleware(['auth'])->group(function () {
             } catch (\Exception $ex) {}
         }
 
+        // 5. Si no existe incidencia, la creamos con tu estructura exacta de pgAdmin
+        if (!\Illuminate\Support\Facades\Schema::hasTable('incidencia')) {
+            try {
+                \Illuminate\Support\Facades\DB::statement('
+                    CREATE TABLE IF NOT EXISTS incidencia (
+                        incidencia_id BIGSERIAL PRIMARY KEY,
+                        mesa_tecnica_id INTEGER NOT NULL,
+                        comunidad_id INTEGER NOT NULL,
+                        titulo VARCHAR(255) NULL,
+                        tipo VARCHAR(100) NULL,
+                        descripcion TEXT NULL,
+                        prioridad VARCHAR(50) NULL,
+                        fecha DATE NULL,
+                        estado VARCHAR(50) NULL,
+                        usuario_id INTEGER NOT NULL,
+                        created_at TIMESTAMP NULL,
+                        updated_at TIMESTAMP NULL
+                    );
+                ');
+            } catch (\Exception $ex) {}
+        }
+
         return view('dashboard');
     })->name('dashboard');
 
