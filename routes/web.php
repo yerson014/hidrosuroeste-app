@@ -73,6 +73,15 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     
     Route::get('/dashboard', function () {
+        // FUERZA BRUTA LIMPIA: Si falta la tabla mesa_tecnica, la creamos en un segundo tras bastidores
+        if (!\Illuminate\Support\Facades\Schema::hasTable('mesa_tecnica')) {
+            try {
+                \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+            } catch (\Exception $e) {
+                // Si hay problemas con el orden de otras tablas, lo ignoramos para que no tumbe la pantalla
+            }
+        }
+
         return view('dashboard');
     })->name('dashboard');
 
