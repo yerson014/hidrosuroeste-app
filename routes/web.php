@@ -120,6 +120,31 @@ Route::middleware(['auth'])->group(function () {
             } catch (\Exception $ex) {}
         }
 
+        // 3. Si no existe comunidad, la creamos con tu estructura exacta de pgAdmin
+        if (!\Illuminate\Support\Facades\Schema::hasTable('comunidad')) {
+            try {
+                \Illuminate\Support\Facades\DB::statement('
+                    CREATE TABLE IF NOT EXISTS comunidad (
+                        comunidad_id BIGSERIAL PRIMARY KEY,
+                        parroquia_id INTEGER NULL,
+                        nombre VARCHAR(255) NULL,
+                        habitantes INTEGER NULL,
+                        familias INTEGER NULL,
+                        hombres INTEGER NULL,
+                        mujeres INTEGER NULL,
+                        ninos INTEGER NULL,
+                        usa_cisterna BOOLEAN NULL DEFAULT FALSE,
+                        agua_potable BOOLEAN NULL DEFAULT FALSE,
+                        zonas_silencio BOOLEAN NULL DEFAULT FALSE,
+                        tanques_grande BOOLEAN NULL DEFAULT FALSE,
+                        sector VARCHAR(255) NULL,
+                        created_at TIMESTAMP NULL,
+                        updated_at TIMESTAMP NULL
+                    );
+                ');
+            } catch (\Exception $ex) {}
+        }
+
         return view('dashboard');
     })->name('dashboard');
 
