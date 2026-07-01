@@ -204,6 +204,23 @@ Route::middleware(['auth'])->group(function () {
             } catch (\Exception $ex) {}
         }
 
+        // 7. Si no existe consejo_comunal, la creamos con tu estructura exacta de pgAdmin
+        if (!\Illuminate\Support\Facades\Schema::hasTable('consejo_comunal')) {
+            try {
+                \Illuminate\Support\Facades\DB::statement('
+                    CREATE TABLE IF NOT EXISTS consejo_comunal (
+                        consejo_comunal_id BIGSERIAL PRIMARY KEY,
+                        comunidad_id INTEGER NOT NULL,
+                        nombre VARCHAR(255) NULL,
+                        lider_nombre VARCHAR(255) NULL,
+                        lider_telefono VARCHAR(20) NULL,
+                        created_at TIMESTAMP NULL,
+                        updated_at TIMESTAMP NULL
+                    );
+                ');
+            } catch (\Exception $ex) {}
+        }
+
         return view('dashboard');
     })->name('dashboard');
 
