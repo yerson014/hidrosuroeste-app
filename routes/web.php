@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schema;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\ParroquiaController;
@@ -20,14 +22,18 @@ use App\Http\Controllers\UsuarioController;
 
 // Redirección inicial
 Route::get('/', function () {
-    // FUERZA BRUTA: migrate:fresh borra todas las tablas "sucias" y las crea en el orden correcto
     try {
+        // 1. DESACTIVAR RESTRICCIONES DE LLAVES FORÁNEAS (Evita el error de "relation does not exist")
+        \Illuminate\Support\Facades\DB::statement('SET CONSTRAINTS ALL DEFERRED;');
+        
+        // 2. Ejecutar un fresqueo total eliminando todo rastro previo
         \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--force' => true]);
+        
     } catch (\Exception $e) {
-        return "Configurando tablas de la base de datos... Por favor refresca en 5 segundos. Error: " . $e->getMessage();
+        return "Error configurando las tablas de la base de datos: " . $e->getMessage();
     }
 
-    // Insertamos al administrador con Hash nativo
+    // 3. Insertamos al administrador con Hash nativo
     try {
         \Illuminate\Support\Facades\DB::table('usuario')->insert([
             'nombre'           => 'Admin',
@@ -44,7 +50,7 @@ Route::get('/', function () {
         return "Error al crear el usuario: " . $e->getMessage();
     }
 
-    // Redirige directo al login una vez creado/limpiado correctamente
+    // Redirige directo al login una vez creado todo perfectamente
     return redirect('/login');
 });
 
