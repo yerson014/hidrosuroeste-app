@@ -187,6 +187,23 @@ Route::middleware(['auth'])->group(function () {
             } catch (\Exception $ex) {}
         }
 
+        // 6. Si no existe centro_asociado, la creamos con tu estructura exacta de pgAdmin
+        if (!\Illuminate\Support\Facades\Schema::hasTable('centro_asociado')) {
+            try {
+                \Illuminate\Support\Facades\DB::statement('
+                    CREATE TABLE IF NOT EXISTS centro_asociado (
+                        centro_asociado_id BIGSERIAL PRIMARY KEY,
+                        comunidad_id INTEGER NOT NULL,
+                        nombre VARCHAR(255) NULL,
+                        tipo VARCHAR(100) NULL,
+                        ubicacion VARCHAR(255) NULL,
+                        created_at TIMESTAMP NULL,
+                        updated_at TIMESTAMP NULL
+                    );
+                ');
+            } catch (\Exception $ex) {}
+        }
+
         return view('dashboard');
     })->name('dashboard');
 
