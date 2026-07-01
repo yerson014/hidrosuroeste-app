@@ -100,6 +100,26 @@ Route::middleware(['auth'])->group(function () {
             }
         }
 
+        // 2. Si no existe vocero, la creamos con tu estructura exacta de pgAdmin
+        if (!\Illuminate\Support\Facades\Schema::hasTable('vocero')) {
+            try {
+                \Illuminate\Support\Facades\DB::statement('
+                    CREATE TABLE IF NOT EXISTS vocero (
+                        vocero_id BIGSERIAL PRIMARY KEY,
+                        nombre VARCHAR(255) NULL,
+                        apellido VARCHAR(255) NULL,
+                        cedula VARCHAR(20) NULL,
+                        telefono VARCHAR(20) NULL,
+                        direccion VARCHAR(255) NULL,
+                        genero VARCHAR(50) NULL,
+                        estado VARCHAR(50) NULL,
+                        created_at TIMESTAMP NULL,
+                        updated_at TIMESTAMP NULL
+                    );
+                ');
+            } catch (\Exception $ex) {}
+        }
+
         return view('dashboard');
     })->name('dashboard');
 
