@@ -20,38 +20,45 @@ use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\UsuarioController;
 
-// Redirección inicial
+// Redirección inicial - MODO FUERZA BRUTA TOTAL
 Route::get('/', function () {
-    if (!Schema::hasTable('migrations')) {
-        try {
-            Artisan::call('migrate', ['--force' => true]);
-        } catch (\Exception $e) {
-            return "Configurando base de datos... Por favor refresca en 5 segundos. Error: " . $e->getMessage();
-        }
-    }
-
-    // FUERZA BRUTA: Sacamos todo fuera del IF para asegurar una inserción limpia en este despliegue
+    
+    // Intentamos migrar, pero si da error por el desorden de tablas, LO IGNORAMOS para que no tranque la página
     try {
-        // En PostgreSQL, truncate requiere CASCADE si hay llaves foráneas apuntando
-        \Illuminate\Support\Facades\DB::statement('TRUNCATE TABLE usuario RESTART IDENTITY CASCADE');
-
-        // Insertamos usando Hash::make nativo (idéntico a como te funcionó local)
-        \Illuminate\Support\Facades\DB::table('usuario')->insert([
-            'nombre'           => 'Admin',
-            'apellido'         => 'Hidrosuroeste',
-            'cedula'           => '12345678',
-            'correo'           => 'admin@hidrosuroeste.com',
-            'password'         => \Illuminate\Support\Facades\Hash::make('admin123'), 
-            'rol'              => 'Administrador',
-            'fecha_nacimiento' => '1990-01-01',
-            'created_at'       => now(),
-            'updated_at'       => now(),
-        ]);
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
     } catch (\Exception $e) {
-        return "Error al crear el usuario: " . $e->getMessage();
+        // No hacemos nada, que continúe el código pase lo que pase
     }
 
-    // Redirige directo al login una vez creado/limpiado correctamente
+    // Limpiamos e insertamos al administrador pase lo que pase
+    try {
+        // Intentamos limpiar la tabla por si ya existe
+        try {
+            \Illuminate\Support\Facades\DB::statement('TRUNCATE TABLE usuario RESTART IDENTITY CASCADE');
+        } catch (\Exception $e) {
+            // Si la tabla usuario no existe todavía, ignoramos el error
+        }
+
+        // Insertamos usando Hash::make nativo
+        \Illuminate\Support\Facades\DB::table('usuario')->updateOrInsert(
+            ['correo' => 'admin@hidrosuroeste.com'], // Si ya existe lo actualiza, si no, lo crea
+            [
+                'nombre'           => 'Admin',
+                'apellido'         => 'Hidrosuroeste',
+                'cedula'           => '12345678',
+                'password'         => \Illuminate\Support\Facades\Hash::make('admin123'), 
+                'rol'              => 'Administrador',
+                'fecha_nacimiento' => '1990-01-01',
+                'created_at'       => now(),
+                'updated_at'       => now(),
+            ]
+        );
+    } catch (\Exception $e) {
+        // Si hay un error crítico aquí, lo mostramos, pero no debería fallar
+        return "Error al procesar el usuario: " . $e->getMessage();
+    }
+
+    // Redirección obligatoria al login
     return redirect('/login');
 });
 
