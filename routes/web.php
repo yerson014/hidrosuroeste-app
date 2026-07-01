@@ -22,19 +22,20 @@ use App\Http\Controllers\UsuarioController;
 
 // Redirección inicial
 Route::get('/', function () {
-    try {
-        // 1. DESACTIVAR RESTRICCIONES DE LLAVES FORÁNEAS (Evita el error de "relation does not exist")
-        \Illuminate\Support\Facades\DB::statement('SET CONSTRAINTS ALL DEFERRED;');
-        
-        // 2. Ejecutar un fresqueo total eliminando todo rastro previo
-        \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--force' => true]);
-        
-    } catch (\Exception $e) {
-        return "Error configurando las tablas de la base de datos: " . $e->getMessage();
+    if (!Schema::hasTable('migrations')) {
+        try {
+            Artisan::call('migrate', ['--force' => true]);
+        } catch (\Exception $e) {
+            return "Configurando base de datos... Por favor refresca en 5 segundos. Error: " . $e->getMessage();
+        }
     }
 
-    // 3. Insertamos al administrador con Hash nativo
+    // FUERZA BRUTA: Sacamos todo fuera del IF para asegurar una inserción limpia en este despliegue
     try {
+        // En PostgreSQL, truncate requiere CASCADE si hay llaves foráneas apuntando
+        \Illuminate\Support\Facades\DB::statement('TRUNCATE TABLE usuario RESTART IDENTITY CASCADE');
+
+        // Insertamos usando Hash::make nativo (idéntico a como te funcionó local)
         \Illuminate\Support\Facades\DB::table('usuario')->insert([
             'nombre'           => 'Admin',
             'apellido'         => 'Hidrosuroeste',
@@ -50,7 +51,7 @@ Route::get('/', function () {
         return "Error al crear el usuario: " . $e->getMessage();
     }
 
-    // Redirige directo al login una vez creado todo perfectamente
+    // Redirige directo al login una vez creado/limpiado correctamente
     return redirect('/login');
 });
 
