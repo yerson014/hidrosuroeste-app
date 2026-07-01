@@ -221,6 +221,42 @@ Route::middleware(['auth'])->group(function () {
             } catch (\Exception $ex) {}
         }
 
+        // 8. Si no existe mesa_historial, la creamos con tu estructura exacta de pgAdmin
+        if (!\Illuminate\Support\Facades\Schema::hasTable('mesa_historial')) {
+            try {
+                \Illuminate\Support\Facades\DB::statement('
+                    CREATE TABLE IF NOT EXISTS mesa_historial (
+                        mesa_historial_id BIGSERIAL PRIMARY KEY,
+                        mesa_tecnica_id INTEGER NOT NULL,
+                        descripcion TEXT NULL,
+                        fecha TIMESTAMP NULL,
+                        usuario_id INTEGER NOT NULL,
+                        created_at TIMESTAMP NULL,
+                        updated_at TIMESTAMP NULL
+                    );
+                ');
+            } catch (\Exception $ex) {}
+        }
+
+        // 9. Si no existe vocero_historial, la creamos con tu estructura TRANSCRITA EXACTA (Corregido a TIMESTAMP)
+        if (!\Illuminate\Support\Facades\Schema::hasTable('vocero_historial')) {
+            try {
+                \Illuminate\Support\Facades\DB::statement('
+                    CREATE TABLE IF NOT EXISTS vocero_historial (
+                        vocero_historial_id BIGSERIAL PRIMARY KEY,
+                        vocero_id INTEGER NOT NULL,
+                        mesa_tecnica_id INTEGER NOT NULL,
+                        fecha_inicio DATE NULL,
+                        fecha_fin DATE NULL,
+                        motivo_salida TEXT NULL,
+                        usuario_id INTEGER NOT NULL,
+                        created_at TIMESTAMP NULL,
+                        updated_at TIMESTAMP NULL
+                    );
+                ');
+            } catch (\Exception $ex) {}
+        }
+
         return view('dashboard');
     })->name('dashboard');
 
