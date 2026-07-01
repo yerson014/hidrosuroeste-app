@@ -145,6 +145,26 @@ Route::middleware(['auth'])->group(function () {
             } catch (\Exception $ex) {}
         }
 
+        // 4. Si no existe proyecto, la creamos con tu estructura exacta de pgAdmin
+        if (!\Illuminate\Support\Facades\Schema::hasTable('proyecto')) {
+            try {
+                \Illuminate\Support\Facades\DB::statement('
+                    CREATE TABLE IF NOT EXISTS proyecto (
+                        proyecto_id BIGSERIAL PRIMARY KEY,
+                        mesa_tecnica_id INTEGER NOT NULL,
+                        fecha DATE NULL,
+                        titulo VARCHAR(255) NULL,
+                        descripcion TEXT NULL,
+                        ubicacion VARCHAR(255) NULL,
+                        estado VARCHAR(50) NULL,
+                        usuario_id INTEGER NOT NULL,
+                        created_at TIMESTAMP NULL,
+                        updated_at TIMESTAMP NULL
+                    );
+                ');
+            } catch (\Exception $ex) {}
+        }
+
         return view('dashboard');
     })->name('dashboard');
 
