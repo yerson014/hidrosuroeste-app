@@ -73,12 +73,30 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     
     Route::get('/dashboard', function () {
-        // FUERZA BRUTA LIMPIA: Si falta la tabla mesa_tecnica, la creamos en un segundo tras bastidores
+        // Si no existe mesa_tecnica, la creamos con la estructura exacta que pide tu sistema
         if (!\Illuminate\Support\Facades\Schema::hasTable('mesa_tecnica')) {
             try {
                 \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
             } catch (\Exception $e) {
-                // Si hay problemas con el orden de otras tablas, lo ignoramos para que no tumbe la pantalla
+                // Si la migración global falla, la creamos manualmente con tus campos reales
+                try {
+                    \Illuminate\Support\Facades\DB::statement('
+                        CREATE TABLE IF NOT EXISTS mesa_tecnica (
+                            mesa_tecnica_id BIGSERIAL PRIMARY KEY,
+                            nombre VARCHAR(255) NULL,
+                            fecha_creacion DATE NULL,
+                            direccion VARCHAR(255) NULL,
+                            numero_integrantes INTEGER NULL,
+                            estado VARCHAR(50) NULL,
+                            consejo_comunal_id INTEGER NULL,
+                            centro_asociado_id INTEGER NULL,
+                            created_at TIMESTAMP NULL,
+                            updated_at TIMESTAMP NULL
+                        );
+                    ');
+                } catch (\Exception $ex) {
+                    // Evita cualquier error en caso de conflicto
+                }
             }
         }
 
