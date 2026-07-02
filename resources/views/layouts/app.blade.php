@@ -345,8 +345,11 @@
             </div>
             
             <div class="d-flex align-items-center gap-3">
-                <button type="button" class="btn btn-warning d-flex align-items-center fw-bold btn-sm px-3 shadow-sm text-dark" data-bs-toggle="modal" data-bs-target="#manualUsuarioModal" style="border-radius: 8px;">
-                    <i data-lucide="help-circle" class="me-2" style="width: 18px; height: 18px;"></i> Manual de Ayuda
+                <button type="button" class="btn btn-warning d-flex align-items-center justify-center fw-bold btn-sm px-2 px-sm-3 shadow-sm text-dark" data-bs-toggle="modal" data-bs-target="#manualUsuarioModal" style="border-radius: 8px;">
+                    <!-- Icono: quitamos 'me-2' y usamos 'me-sm-2' para que el margen solo exista cuando hay texto -->
+                    <i data-lucide="help-circle" class="me-sm-2" style="width: 18px; height: 18px;"></i> 
+                    <!-- Texto: se oculta en móviles con 'd-none' y se muestra desde pantallas pequeñas en adelante con 'd-sm-inline' -->
+                    <span class="d-none d-sm-inline">Manual de Ayuda</span>
                 </button>
 
                 <div class="dropdown">

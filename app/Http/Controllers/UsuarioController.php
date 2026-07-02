@@ -168,6 +168,52 @@ class UsuarioController extends Controller
                 return back()->with('error', 'No puedes eliminar tu propia cuenta de usuario.');
             }
 
+            // 1. CONTROL SEGURO: Buscar si existen dependencias activas en las otras tablas
+            $proyectoAsociado = \App\Models\Proyecto::where('usuario_id', $id)->first();
+            $incidenciaAsociada = \App\Models\Incidencia::where('usuario_id', $id)->first();
+            $historialMesa = \App\Models\MesaHistorial::where('usuario_id', $id)->first();
+            $historialVocero = \App\Models\VoceroHistorial::where('usuario_id', $id)->first();
+
+            // 2. Si se detecta cualquier tipo de relación, estructuramos la alerta de cancelación
+            if ($proyectoAsociado || $incidenciaAsociada || $historialMesa || $historialVocero) {
+                
+                $mensaje = "El usuario '{$usuario->nombre} {$usuario->apellido}' no se puede eliminar porque está encargado de registrar o gestionar: ";
+                $detalles = [];
+
+                if ($proyectoAsociado) {
+                    $nombreProyecto = !empty($proyectoAsociado->titulo) ? $proyectoAsociado->titulo : ($proyectoAsociado->proyecto_id ?? 'Código #' . $proyectoAsociado->id);
+                    $detalles[] = "el proyecto '{$nombreProyecto}'";
+                }
+
+                if ($incidenciaAsociada) {
+                    $nombreIncidencia = !empty($incidenciaAsociada->titulo) ? $incidenciaAsociada->titulo : ($incidenciaAsociada->incidencia_id ?? 'Código #' . $incidenciaAsociada->id);
+                    $detalles[] = "la incidencia '{$nombreIncidencia}'";
+                }
+
+                if ($historialMesa) {
+                    $detalles[] = "historiales de mesas técnicas";
+                }
+
+                if ($historialVocero) {
+                    $detalles[] = "historiales de voceros";
+                }
+
+                // Concatenación dinámica de los detalles con comas y la conjunción "y"
+                if (count($detalles) > 1) {
+                    $ultimo = array_pop($detalles);
+                    $mensaje .= implode(', ', $detalles) . " y " . $ultimo . ".";
+                } else {
+                    $mensaje .= $detalles[0] . ".";
+                }
+
+                return back()->with('error_relacion', $mensaje);
+            }
+
+            // 3. Validación de resguardo: Si es el único usuario del sistema, no permitir eliminarlo
+            if (User::count() <= 1) {
+                return back()->with('error_relacion', "No se puede eliminar a '{$usuario->nombre}' porque es el único usuario registrado en el sistema.");
+            }
+
             $usuario->delete();
             return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado correctamente.');
         } catch (\Exception $e) {

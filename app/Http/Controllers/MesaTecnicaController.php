@@ -149,11 +149,17 @@ class MesaTecnicaController extends Controller
                 
                 $mensaje = "La mesa técnica '{$mesa->nombre}' no se puede eliminar porque está siendo referenciada por ";
 
-                // Plan de contingencia por si los campos descriptivos vienen vacíos de la Base de Datos
-                $nombreProyecto = !empty($proyectoAsociado->nombre) ? $proyectoAsociado->nombre : ($proyectoAsociado->proyecto_id ?? 'Código #' . $proyectoAsociado->id ?? 'N/A');
+                // CONTROL SEGURO: Solo extrae el título si el proyecto realmente existe
+                $nombreProyecto = 'N/A';
+                if ($proyectoAsociado) {
+                    $nombreProyecto = !empty($proyectoAsociado->titulo) ? $proyectoAsociado->titulo : ($proyectoAsociado->proyecto_id ?? 'Código #' . $proyectoAsociado->id ?? 'N/A');
+                }
                 
-                // Intentar capturar 'asunto', si no 'titulo', si no 'descripcion', o finalmente su ID
-                $nombreIncidencia = !empty($incidenciaAsociada->asunto) ? $incidenciaAsociada->asunto : ($incidenciaAsociada->titulo ?? $incidenciaAsociada->descripcion ?? 'Código #' . $incidenciaAsociada->incidencia_id ?? 'N/A');
+                // CONTROL SEGURO: Solo extrae el asunto/título si la incidencia realmente existe
+                $nombreIncidencia = 'N/A';
+                if ($incidenciaAsociada) {
+                    $nombreIncidencia = !empty($incidenciaAsociada->asunto) ? $incidenciaAsociada->asunto : ($incidenciaAsociada->titulo ?? $incidenciaAsociada->descripcion ?? 'Código #' . $incidenciaAsociada->incidencia_id ?? 'N/A');
+                }
 
                 if ($proyectoAsociado && $incidenciaAsociada) {
                     // Si está enlazada tanto a un proyecto como a una incidencia
@@ -166,6 +172,7 @@ class MesaTecnicaController extends Controller
                     $mensaje .= "la incidencia '{$nombreIncidencia}'.";
                 }
 
+                // Se retorna con la clave que tu vista/modal lee para levantar el aviso de cancelación
                 return back()->with('error_relacion', $mensaje);
             }
 

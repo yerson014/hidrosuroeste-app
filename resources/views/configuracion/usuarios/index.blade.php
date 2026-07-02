@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Importación de SweetAlert2 al inicio como en tu ejemplo de Historial -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="container-fluid">
@@ -14,7 +13,6 @@
         </a>
     </div>
 
-    <!-- Barra de Búsqueda -->
     <div class="card border-0 shadow-sm mb-4" style="border-radius: 12px;">
         <div class="card-body p-3">
             <form action="{{ route('usuarios.index') }}" method="GET">
@@ -41,7 +39,6 @@
         </div>
     </div>
 
-    <!-- Manejo de Alerta de Éxito con SweetAlert (Igual que en Historial) -->
     @if(session('success'))
     <script>
         Swal.fire({
@@ -54,13 +51,35 @@
     </script>
     @endif
 
-    <!-- Grid de Usuarios (Cards) -->
+    @if(session('error_relacion'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: '¡Operación Cancelada!',
+            text: "{{ session('error_relacion') }}",
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Entendido'
+        });
+    </script>
+    @endif
+
+    @if(session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: '¡Operación Cancelada!',
+            text: "{{ session('error') }}",
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Entendido'
+        });
+    </script>
+    @endif
+
     <div class="row g-4">
         @forelse($usuarios as $user)
         <div class="col-xl-3 col-lg-4 col-md-6">
             <div class="card border-0 shadow-sm h-100 text-center p-3" style="border-radius: 15px; transition: transform 0.2s;">
                 <div class="card-body">
-                    <!-- Avatar / Iniciales -->
                     <div class="mx-auto mb-3 d-flex align-items-center justify-content-center text-white fw-bold shadow-sm" 
                          style="width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(45deg, var(--primary), #6366f1); font-size: 1.5rem;">
                         {{ strtoupper(substr($user->nombre, 0, 1) . substr($user->apellido, 0, 1)) }}
@@ -83,7 +102,6 @@
                             <i data-lucide="edit-2" style="width: 16px;"></i>
                         </a>
                         
-                        <!-- Formulario de eliminación con ID único para el Script -->
                         <form action="{{ route('usuarios.destroy', $user->usuario_id) }}" method="POST" id="delete-form-{{ $user->usuario_id }}" class="d-inline">
                             @csrf
                             @method('DELETE')
@@ -105,7 +123,6 @@
         @endforelse
     </div>
 
-    <!-- Paginación -->
     <div class="mt-5 d-flex justify-content-center">
         {{ $usuarios->appends(['buscar' => $buscar])->links('pagination::bootstrap-5') }}
     </div>

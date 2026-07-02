@@ -23,6 +23,7 @@
                     <div class="col-md-4">
                         <label class="form-label fw-bold">Estado <span class="text-danger">*</span></label>
                         <select name="estado" class="form-select" required>
+                            <option value="suspendida" {{ old('estado') == 'suspendida' ? 'selected' : '' }}>Suspendida</option>
                             <option value="registrada" {{ old('estado') == 'registrada' ? 'selected' : '' }}>Registrada</option>
                             <option value="atendida" {{ old('estado') == 'atendida' ? 'selected' : '' }}>Atendida</option>
                             <option value="resuelta" {{ old('estado') == 'resuelta' ? 'selected' : '' }}>Resuelta</option>
@@ -66,7 +67,7 @@
                             <option value="Denuncia" {{ old('tipo') == 'Denuncia' ? 'selected' : '' }}>Denuncia / Toma Ilegal</option>
                             <option value="Infraestructura" {{ old('tipo') == 'Infraestructura' ? 'selected' : '' }}>Infraestructura / Tuberías</option>
                             <option value="Calidad" {{ old('tipo') == 'Calidad' ? 'selected' : '' }}>Calidad / Turbidez</option>
-                            <option value="Otro" {{ old('tipo') == 'Otro' ? 'selected' : '' }}>Otro</option>
+                            <option value="Otro" {{ old('tipo') == 'Otro' ? 'selected' : '' }}>Filtración Externa</option>
                         </select>
                     </div>
 

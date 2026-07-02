@@ -9,9 +9,9 @@
             <i data-lucide="alert-circle" class="me-2"></i>Gestión de Incidencias
         </h4>
         <div class="d-flex gap-2">
-            {{-- <button type="button" class="btn btn-outline-danger d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#modalReporteFechas" style="border-radius: 8px; padding: 10px 20px;">
+            <button type="button" class="btn btn-outline-danger d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#modalReporteFechas" style="border-radius: 8px; padding: 10px 20px;">
                 <i data-lucide="file-text" class="me-2"></i> Reporte General
-            </button> --}}
+            </button>
 
             <a href="{{ route('incidencias.create') }}" class="btn btn-primary d-flex align-items-center" style="background: var(--primary); border: none; border-radius: 8px; padding: 10px 20px;">
                 <i data-lucide="plus" class="me-2"></i> Nueva Incidencia
@@ -23,7 +23,7 @@
         <script>
             Swal.fire({
                 icon: 'success',
-                title: '¡Actualizado!',
+                title: '¡Éxito!',
                 text: "{{ session('success') }}",
                 timer: 3000,
                 showConfirmButton: false
@@ -118,9 +118,9 @@
                         </td>
                         <td class="text-center">
                             <div class="d-flex justify-content-center gap-2">
-                                {{-- <a href="{{ route('incidencias.show', $incidencia->incidencia_id) }}" target="_blank" class="btn btn-sm btn-outline-danger" title="Ver Reporte PDF">
+                                <a href="{{ route('incidencias.show', $incidencia->incidencia_id) }}" target="_blank" class="btn btn-sm btn-outline-danger" title="Ver Reporte PDF">
                                     <i data-lucide="file-text" style="width: 16px;"></i>
-                                </a> --}}
+                                </a>
 
                                 <a href="{{ route('incidencias.edit', $incidencia->incidencia_id) }}" class="btn btn-sm btn-outline-secondary" title="Editar">
                                     <i data-lucide="edit-3" style="width: 16px;"></i>
