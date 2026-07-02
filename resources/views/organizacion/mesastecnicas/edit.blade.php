@@ -101,7 +101,7 @@
 
         <div class="d-flex justify-content-end gap-2 mt-4">
             <a href="{{ route('mesas-tecnicas.index') }}" class="btn btn-light px-4">Cancelar</a>
-            <button type="submit" class="btn btn-primary px-5" style="background: var(--primary); border: none;">Actualizar Cambios</button>
+            <button type="submit" class="btn btn-primary px-5" style="background: var(--primary); border: none;">Actualizar Mesa Técnica</button>
         </div>
     </form>
 </div>

@@ -339,7 +339,9 @@
                 <i data-lucide="menu"></i>
             </button>
             <div class="d-flex align-items-center">
-                <h5 class="m-0 fw-bold text-muted" style="font-size: 1rem;">Panel de Administración - Gerencia Comunitaria</h5>
+                <h5 class="m-0 fw-bold text-muted" style="font-size: calc(0.85rem + 0.3vw);">
+                    Panel de Administración<span class="d-none d-sm-inline"> - Gerencia Comunitaria</span>
+                </h5>
             </div>
             
             <div class="d-flex align-items-center gap-3">
@@ -414,73 +416,104 @@
 
                                 <div class="tab-pane fade" id="v-pills-dash" role="tabpanel">
                                     <h4 class="fw-bold mb-3 text-primary">Dashboard / Panel Principal</h4>
-                                    <p class="text-secondary leading-relaxed">Al acceder satisfactoriamente al sistema, visualizará el Dashboard o panel central de estadísticas. Desde este módulo podrá consultar de forma rápida, dinámica y en tiempo real la información general relacionada con las <strong>Mesas Técnicas de Agua (MTA)</strong>, proyectos e incidencias operativas activas, además de navegar de forma directa a los submódulos usando el menú lateral o la barra de procesos rápidos.</p>
+                                    <p class="text-secondary leading-relaxed">Al acceder satisfactoriamente al sistema, se visualizará el Dashboard o panel principal. Aquí podrás consultar de forma rápida la información general relacionada con las <strong>Mesas Técnicas de Agua (MTA)</strong>, proyectos e incidencias operativas activas, además de acceder a los diferentes módulos disponibles mediante el menú de navegación.</p>
                                 </div>
 
                                 <div class="tab-pane fade" id="v-pills-muni" role="tabpanel">
                                     <h4 class="fw-bold mb-3 text-primary">Módulo de Gestión de Municipios</h4>
-                                    <p class="text-secondary leading-relaxed">Este módulo permite estructurar la división político-territorial base de las comunidades asignadas a Hidrosuroeste.</p>
+                                    <p class="text-secondary leading-relaxed">Este módulo permite gestionar los municipios registrados dentro del sistema.</p>
                                     <ul class="text-secondary mb-3">
-                                        <li><strong>Registrar Municipio:</strong> Permite ingresar y seleccionar la entidad que desea registrar. Para concretar, asigne el nombre correspondiente de la lista del Estado Táchira y presione el botón <code>Guardar Municipio</code>.</li>
-                                        <li><strong>Listado de Municipios:</strong> Desde esta pantalla de control puede auditar todos los municipios vigentes, realizar búsquedas rápidas mediante filtros, editar los nombres existentes o eliminar registros de manera permanente.</li>
+                                        <li><strong>Registrar Municipio:</strong> Para registrar un municipio, haz click en el boton <code>Nuevo Municipio</code>, seleccione el municipio correspondiente y presione el botón <code>Guardar Municipio</code>.</li>
+                                        <li><strong>Listado de Municipios:</strong> Desde esta pantalla puedes consultar todos los municipios vigentes, realizar búsquedas, editar información existente o eliminar registros cuando sea necesario.</li>
                                     </ul>
                                 </div>
 
                                 <div class="tab-pane fade" id="v-pills-parr" role="tabpanel">
                                     <h4 class="fw-bold mb-3 text-primary">Módulo de Parroquias</h4>
-                                    <p class="text-secondary leading-relaxed">Este submódulo permite administrar y asociar las parroquias correspondientes a cada municipio registrado.</p>
+                                    <p class="text-secondary leading-relaxed">Este módulo permite gestionar las parroquias asociadas a cada municipio.</p>
                                     <ul class="text-secondary mb-3">
-                                        <li><strong>Municipio perteneciente:</strong> Menú desplegable para seleccionar la entidad territorial de origen que condicionará la parroquia.</li>
-                                        <li><strong>Nombre de la Parroquia:</strong> Identificador único del sector dentro del sistema.</li>
+                                        <li><strong>Municipio perteneciente:</strong> Municipio donde se encuentra ubicada la parroquia.</li>
+                                        <li><strong>Nombre de la Parroquia:</strong> Nombre que identificará la parroquia dentro del sistema.</li>
                                     </ul>
-                                    <p class="text-secondary">Para registrar una nueva entidad, asigne la relación correcta y valide en el botón de guardado. Podrá actualizar o eliminar registros desde la tabla de consulta general.</p>
+                                    <p class="text-secondary">Para registrar una parroquia, haz click en el boton <code>Nueva Parroquia</code>, debes seleccionar el municipio al que pertenece y luego indicar el nombre de la parroquia de acuerdo al municipio seleccionado y presionar el botón <code>Guardar Parroquia</code>.</p>
+                                    <p class="text-secondary">En el listado de parroquias permite consultar las parroquias registradas y realizar búsquedas de información.</p>
                                 </div>
 
                                 <div class="tab-pane fade" id="v-pills-comu" role="tabpanel">
                                     <h4 class="fw-bold mb-3 text-primary">Módulo de Comunidades</h4>
-                                    <p class="text-secondary leading-relaxed">Permite el registro, caracterización sociodemográfica y diagnóstico técnico de las redes de los sectores habitacionales.</p>
-                                    <h6 class="fw-bold text-dark mt-2">Campos Técnicos y Demográficos:</h6>
+                                    <p class="text-secondary leading-relaxed">Este módulo permite registrar y administrar las comunidades asociadas a cada parroquia.</p>
                                     <ul class="text-secondary mb-3">
-                                        <li><strong>Ubicación:</strong> Selección de la Parroquia perteneciente, Nombre de la Comunidad y Sector/Zona específica.</li>
-                                        <li><strong>Demografía:</strong> Registro cuantitativo de Población Total, Familias, Hombres, Mujeres y Niños.</li>
-                                        <li><strong>Estatus del Servicio (Toggles):</strong> Permite activar si la comunidad <i>Usa Cisterna</i>, si cuenta con red de <i>Agua Potable</i>, si está catalogada en <i>Zonas de Silencio</i> (sin suministro continuo) o si posee <i>Tanques Grandes</i>.</li>
+                                        <li><strong>Parroquia perteneciente:</strong> Parroquia donde se encuentra ubicada la comunidad.</li>
+                                        <li><strong>Nombre de la comunidad:</strong> Nombre de la comunidad.</li>
+                                        <li><strong>Sector:</strong> Sector o zona a la que pertenece.</li>
+                                        <li><strong>Usa cisterna:</strong> Especifica si recibe suministro de agua mediante cisterna.</li>
+                                        <li><strong>Agua potable:</strong> Indica la disponibilidad del servicio de agua potable.</li>
+                                        <li><strong>Zonas de silencio:</strong> Permite indicar si en esa comunidad no les llega suficiente agua potable.</li>
+                                        <li><strong>Tanques grandes:</strong> Indica la existencia de sistemas de almacenamiento de agua.</li>
+                                        <li><strong>Habitantes:</strong> Cantidad total de habitantes.</li>
+                                        <li><strong>Familias:</strong> Número de familias.</li>
+                                        <li><strong>Hombres:</strong> Número de Habitantes Masculinos.</li>
+                                        <li><strong>Mujeres:</strong> Número de Habitantes Femeninos.</li>
+                                        <li><strong>Niños:</strong> Número de Habitantes Niños.</li>
                                     </ul>
-                                    <p class="text-secondary">Utilice <code>Guardar Comunidad</code> para registrar o <code>Editar</code> desde la grilla principal para modificar parámetros de población.</p>
+                                    <p class="text-secondary">Para registrar una <code>Nueva Comunidad</code> debes completar la información solicitada y presionar el botón <code>Guardar Comunidad</code>.</p>
+                                    <p class="text-secondary">En la gestión de comunidades podrás consultar las comunidades registradas y realizar búsquedas de información.</p>
                                 </div>
 
                                 <div class="tab-pane fade" id="v-pills-comunas" role="tabpanel">
                                     <h4 class="fw-bold mb-3 text-primary">Módulo de Comunas</h4>
-                                    <p class="text-secondary leading-relaxed">Permite administrar las estructuras de agregación e integración comunal dentro del estado.</p>
+                                    <p class="text-secondary leading-relaxed">Este módulo permite registrar y administrar las comunas existentes.</p>
                                     <ul class="text-secondary mb-3">
-                                        <li><strong>Formulario de Registro:</strong> Requiere seleccionar de forma obligatoria la Parroquia, enlazar opcionalmente una Comunidad y escribir la denominación legal en el campo <i>Nombre de la Comuna</i>.</li>
-                                        <li><strong>Modificación:</strong> Presione <code>Guardar Comuna</code> para almacenar, o use el botón de edición para ajustar el nombre o añadir comunidades socias.</li>
+                                        <li><strong>Parroquia perteneciente:</strong> Parroquia donde se encuentra ubicada la comuna.</li>
+                                        <li><strong>Comunidad asociada:</strong> Comunidad relacionada con la comuna.</li>
+                                        <li><strong>Nombre de la comuna:</strong> Nombre que identificará la comuna.</li>
                                     </ul>
+                                    <p class="text-secondary">Para registrar una <code>Nueva Comuna</code> debes completar la información solicitada y presionar el botón <code>Guardar Comuna</code>.</p>
+                                    <p class="text-secondary">En la gestión de comunas podrás consultar las comunas registradas dentro del sistema y realizar búsquedas de información.</p>
                                 </div>
 
                                 <div class="tab-pane fade" id="v-pills-centros" role="tabpanel">
-                                    <h4 class="fw-bold mb-3 text-primary">Centros Educativos e Institucionales</h4>
-                                    <p class="text-secondary leading-relaxed">Mapea la infraestructura prioritaria (CDI, Escuelas, UBCH) vinculada a los territorios para optimizar planes de contingencia hídrica.</p>
+                                    <h4 class="fw-bold mb-3 text-primary">Módulo de Centros Educativos</h4>
+                                    <p class="text-secondary leading-relaxed">Este módulo permite registrar instituciones educativas asociadas a las comunidades.</p>
                                     <ul class="text-secondary mb-3">
-                                        <li><strong>Formulario:</strong> Vincule la Comunidad perteneciente, categorice el espacio en <i>Tipo de Centro</i>, registre el nombre oficial del establecimiento y la <i>Dirección o Ubicación Técnica</i> exacta.</li>
-                                        <li><strong>Acción:</strong> Presione <code>Guardar Registro</code> para añadir y audite el listado general ante cambios institucionales.</li>
+                                        <li><strong>Comunidad perteneciente:</strong> Comunidad donde se encuentra ubicada la institución.</li>
+                                        <li><strong>Tipo de Centro:</strong> Clasificación de la institución educativa.</li>
+                                        <li><strong>Nombre de la escuela:</strong> Nombre de la institución.</li>
+                                        <li><strong>Dirección o Ubicación Técnica:</strong> Ubicación física de la institución.</li>
                                     </ul>
+                                    <p class="text-secondary">Para registrar un <code>Nuevo Centro</code> debes completar los datos solicitados y luego presionar el botón <code>Guardar Centro</code>.</p>
+                                    <p class="text-secondary">En la gestión de comunas podrás consultar las comunas registradas dentro del sistema y realizar búsquedas de información.</p>
                                 </div>
 
                                 <div class="tab-pane fade" id="v-pills-consejos" role="tabpanel">
                                     <h4 class="fw-bold mb-3 text-primary">Módulo de Consejos Comunales</h4>
-                                    <p class="text-secondary leading-relaxed">Controla las organizaciones comunitarias de base que dan origen y legitimidad a los comités técnicos del agua.</p>
+                                    <p class="text-secondary leading-relaxed">Este módulo permite registrar y administrar los consejos comunales asociados a cada comunidad.</p>
                                     <ul class="text-secondary mb-3">
-                                        <li><strong>Datos requeridos:</strong> Selección de la Comunidad perteneciente y el Nombre oficial del Consejo Comunal.</li>
-                                        <li><strong>Enlace de Coordinación:</strong> Datos del vocero líder como el <i>Nombre del Líder</i> y su <i>Teléfono de Contacto</i> directo.</li>
+                                        <li><strong>Comunidad perteneciente:</strong> Comunidad donde funciona el consejo comunal.</li>
+                                        <li><strong>Nombre de la consejo comunal:</strong> Nombre del consejo comunal.</li>
+                                        <li><strong>Nombre del líder:</strong> Responsable o representante principal.</li>
+                                        <li><strong>Teléfono de contacto:</strong> Número telefónico del responsable.</li>
                                     </ul>
-                                    <p class="text-secondary">Esencial para actualizar números telefónicos y renovaciones de vocerías mediante la opción <code>Editar</code>.</p>
+                                    <p class="text-secondary">Para registrar un <code>Nuevo Consejo</code> debes completar la información requerida y luego presionar el botón <code>Guardar Consejo Comunal</code>.</p>
+                                    <p class="text-secondary">En la gestión de consejos comunales podrás visualizar y consultar los consejos comunales registrados en el sistema y realizar búsquedas de información.</p>
                                 </div>
 
                                 <div class="tab-pane fade" id="v-pills-mta" role="tabpanel">
                                     <h4 class="fw-bold mb-3 text-primary">Mesas Técnicas de Agua (MTA)</h4>
                                     <div style="display: block; width: 100%;">
-                                        <p class="text-secondary leading-relaxed">Eje fundamental del sistema operativo. Permite gestionar, registrar y auditar las Mesas Técnicas encargadas de la supervisión de las redes hidráulicas comunitarias.</p>
-                                        <p class="text-secondary">Cada registro requiere la vinculación obligatoria a una comunidad o consejo comunal legalmente constituido, la declaración del número total de integrantes activos y el estatus actual de funcionamiento de la misma.</p>
+                                    <p class="text-secondary leading-relaxed"><strong>Eje fundamental del sistema.</strong> Este módulo permite registrar y administrar las Mesas Técnicas de Agua asociadas a las comunidades.</p>
+                                    <p class="text-secondary">Cada registro requiere la vinculación obligatoria a una comunidad o consejo comunal legalmente constituido, la declaración del número total de integrantes activos y el estatus actual de funcionamiento de la misma.</p>
+                                    <ul class="text-secondary mb-3">
+                                        <li><strong>Nombre de la Mesa Técnica:</strong> Permite indicar el nombre que identificará la mesa técnica.</li>
+                                        <li><strong>Consejo Comunal:</strong> Permite seleccionar el consejo comunal asociado.</li>
+                                        <li><strong>Centro Educativo/Asociado (Opcional):</strong> Permite relacionar un centro educativo o institución vinculada.</li>
+                                        <li><strong>Dirección Específica:</strong> Permite registrar la ubicación detallada de la mesa técnica.</li>
+                                        <li><strong>Estado Operativo:</strong> Permite indicar si la mesa técnica se encuentra activa o en otra condición operativa.</li>
+                                        <li><strong>Fecha de Constitución:</strong> Fecha en la que fue conformada la mesa técnica.</li>
+                                        <li><strong>N° de Voceros (Integrantes):</strong> Cantidad de voceros asociados a la mesa técnica.</li>
+                                    </ul>
+                                    <p class="text-secondary">Para registrar una <code>Nueva Mesa</code> debes completar la información solicitada y posteriormente presionar el botón <code>Guardar Mesa Técnica</code>.</p>
+                                    <p class="text-secondary">En la gestión de mesas técnicas puedes consultar las mesas técnicas registradas, realizar búsquedas, editar información existente o eliminar registros cuando sea necesario.</p>
                                         <div class="alert alert-warning d-flex align-items-center mt-3">
                                             <i data-lucide="alert-circle" class="me-2"></i> <strong>Regla de Validación:</strong> El sistema restringe la estructura a un máximo estricto de 12 integrantes (6 voceros principales y 6 voceros suplentes). No se admiten nombres duplicados.
                                         </div>
@@ -489,52 +522,81 @@
 
                                 <div class="tab-pane fade" id="v-pills-voceros" role="tabpanel">
                                     <h4 class="fw-bold mb-3 text-primary">Módulo de Gestión de Voceros</h4>
-                                    <p class="text-secondary leading-relaxed">Administra el padrón y las fichas de identidad de los ciudadanos que integran de forma activa las MTA registradas.</p>
+                                    <p class="text-secondary leading-relaxed">Este módulo permite registrar y administrar los voceros pertenecientes a las Mesas Técnicas de Agua.</p>
                                     <ul class="text-secondary mb-3">
-                                        <li><strong>Información obligatoria:</strong> Cédula de Identidad (ID único de validación), Nombres, Apellidos, Género, Teléfono, Estado (Activo/Inactivo) y Dirección de Habitación.</li>
-                                        <li><strong>Búsqueda:</strong> El panel principal permite filtrar inmediatamente por cédula, nombre o teléfono para agilizar las auditorías de los comités.</li>
+                                        <li><strong>Cédula:</strong> Número de identificación del vocero. </li>
+                                        <li><strong>Nombre:</strong> Nombre del Vocero.</li>
+                                        <li><strong>Apellido:</strong> Apellido del Vocero.</li>
+                                        <li><strong>Género:</strong> Género del Vocero.</li>
+                                        <li><strong>Teléfono:</strong> Número telefónico de contacto.</li>
+                                        <li><strong>Estado:</strong> Permite indicar si el vocero se encuentra activo. </li>
+                                        <li><strong>Dirección de Habitación:</strong> Dirección de residencia del vocero.</li>
                                     </ul>
+                                    <p class="text-secondary">Para registrar un <code>Nuevo Vocero</code> debes completar la información solicitada y luego presionar el botón <code>Guardar Vocero</code>.</p>
+                                    <p class="text-secondary">En la gestión de voceros podrás consultar todos los voceros registrados dentro del sistema, realizar búsquedas, editar información existente o eliminar registros cuando sea necesario.</p>
                                 </div>
 
                                 <div class="tab-pane fade" id="v-pills-hist-mta" role="tabpanel">
                                     <h4 class="fw-bold mb-3 text-primary">Historial de Mesas Técnicas</h4>
-                                    <p class="text-secondary leading-relaxed">Asegura la memoria institucional y trazabilidad del trabajo de campo comunitario.</p>
+                                    <p class="text-secondary leading-relaxed">Este módulo permite llevar el control histórico de las actividades y eventos relacionados con las Mesas Técnicas de Agua.</p>
                                     <ul class="text-secondary mb-3">
-                                        <li><strong>Registro de Eventos:</strong> Permite seleccionar una Mesa Técnica y documentar mediante una <i>Descripción del Evento</i> las minutas de asambleas, inspecciones de ingenieros de Hidrosuroeste o jornadas de mantenimiento.</li>
-                                        <li>Asigne la <i>Fecha y Hora del Evento</i> exacta y guarde con el botón <code>Guardar en Historial</code>.</li>
+                                        <li><strong>Mesa Técnica:</strong> Permite seleccionar la mesa técnica relacionada con el evento.</li>
+                                        <li><strong>Descripción del Evento:</strong> Permite registrar el detalle de la actividad, reunión, mantenimiento o cualquier acontecimiento relacionado.</li>
+                                        <li><strong>Fecha y Hora del Evento:</strong> Permite indicar la fecha y hora en que ocurrió el evento.</li>
                                     </ul>
+                                    <p class="text-secondary">Para registrar un <code>Nuevo Registro</code> o evento en el historial de las mesas técnicas, debes completar la información solicitada y luego presionar el botón <code>Guardar en Historial</code>.</p>
+                                    <p class="text-secondary">Desde esta pantalla de Historial de Mesas Técnicas puedes consultar los registros históricos asociados a cada Mesa Técnica de Agua.</p>
                                 </div>
 
                                 <div class="tab-pane fade" id="v-pills-hist-voc" role="tabpanel">
-                                    <h4 class="fw-bold mb-3 text-primary">Historial de Gestión de Voceros</h4>
-                                    <p class="text-secondary leading-relaxed">Audita los tiempos de permanencia, incorporaciones y rotaciones del poder popular dentro de las mesas de agua.</p>
+                                    <h4 class="fw-bold mb-3 text-primary">Historial de Voceros</h4>
+                                    <p class="text-secondary leading-relaxed">Este módulo permite mantener un registro histórico de la participación de los voceros dentro de las Mesas Técnicas de Agua.</p>
                                     <ul class="text-secondary mb-3">
-                                        <li><strong>Campos del Histórico:</strong> Selección del Vocero, vinculación a la Mesa Técnica correspondiente y fijación de la <i>Fecha de Inicio</i> y <i>Fecha de Fin</i>.</li>
-                                        <li><strong>Validación de Cese:</strong> Al desvincular un vocero, el sistema exige rellenar el campo <i>Motivo de Salida</i> (por ejemplo: mudanza, renovación de vocerías) para mantener limpia la auditoría de datos.</li>
+                                        <li><strong>Vocero:</strong> Permite seleccionar el vocero correspondiente.</li>
+                                        <li><strong>Mesa Técnica:</strong> Permite seleccionar la mesa técnica a la que pertenece.</li>
+                                        <li><strong>Motivo de Salida (Si aplica):</strong> Permite registrar la razón por la cual el vocero deja de formar parte de la mesa técnica.</li>
+                                        <li><strong>Fecha de Inicio:</strong> Fecha de incorporación del vocero.</li>
+                                        <li><strong>Fecha de Fin (Opcional):</strong> Fecha de culminación de sus funciones dentro de la mesa técnica.</li>
                                     </ul>
+                                    <p class="text-secondary">Para registrar un <code>Nuevo Registro</code> en el historial de voceros debes completar los datos solicitados y presionar el botón <code>Guardar Historial</code>.</p>
+                                    <p class="text-secondary">Desde esta pantalla de Historial de Voceros puedes visualizar los períodos de participación de cada vocero dentro de las diferentes Mesas Técnicas de Agua.</p>
                                 </div>
 
                                 <div class="tab-pane fade" id="v-pills-proy" role="tabpanel">
-                                    <h4 class="fw-bold mb-3 text-primary">Control de Proyectos Comunitarios</h4>
-                                    <p class="text-secondary leading-relaxed">Monitorea de forma centralizada el ciclo de vida de las propuestas de infraestructura hídrica introducidas por el poder popular.</p>
+                                    <h4 class="fw-bold mb-3 text-primary">Módulo de Proyectos</h4>
+                                    <p class="text-secondary leading-relaxed">Este módulo permite registrar y administrar los proyectos asociados a las Mesas Técnicas del Agua.</p>
                                     <ul class="text-secondary mb-3">
-                                        <li><strong>Campos de Ficha:</strong> Título del Proyecto, Mesa Técnica Responsable, Ubicación de la Obra, Fecha de Carga y una amplia Descripción Detallada del alcance técnico.</li>
-                                        <li><strong>Flujo de Estatus:</strong> Permite actualizar el estado del proyecto según las inspecciones a: <i>En Revisión, Aprobado, En Ejecución o Finalizado</i>.</li>
+                                        <li><strong>Título del Proyecto:</strong> Nombre que identifica el proyecto.</li>
+                                        <li><strong>Mesa Técnica Responsable:</strong> Permite seleccionar la mesa técnica encargada del proyecto.</li>
+                                        <li><strong>Estado:</strong> Permite indicar la situación actual del proyecto.</li>
+                                        <li><strong>Fecha de Registro:</strong> Fecha en que se registra el proyecto.</li>
+                                        <li><strong>Ubicación / Dirección:</strong> Lugar donde se desarrollará el proyecto.</li>
+                                        <li><strong>Descripción del Proyecto:</strong> Permite detallar los objetivos, alcance o actividades relacionadas con el proyecto.</li>
                                     </ul>
+                                    <p class="text-secondary">Para registrar un <code>Nuevo Proyecto</code> debes completar la información requerida y posteriormente presionar el botón <code>Guardar Proyecto</code>.</p>
+                                    <p class="text-secondary">En la gestión de proyectos podrás consultar todos los proyectos registrados dentro del sistema, realizar búsquedas, editar registros existentes o eliminarlos cuando sea necesario.</p>
                                 </div>
 
                                 <div class="tab-pane fade" id="v-pills-inci" role="tabpanel">
-                                    <h4 class="fw-bold mb-3 text-primary">Gestión de Incidencias de Servicio</h4>
-                                    <p class="text-secondary leading-relaxed">Canaliza reportes de fallas de borde, fracturas de tuberías principales o solicitudes críticas de abastecimiento.</p>
+                                    <h4 class="fw-bold mb-3 text-primary">Módulo de Incidencias</h4>
+                                    <p class="text-secondary leading-relaxed">Este módulo permite registrar y dar seguimiento a las incidencias relacionadas con el servicio de agua.</p>
                                     <ul class="text-secondary mb-3">
-                                        <li><strong>Apertura de Reportes:</strong> Defina un Título descriptivo, Tipo de Incidencia, Comunidad Afectada y la Mesa Técnica que reporta.</li>
-                                        <li><strong>Priorización Técnica:</strong> Clasifique la urgencia mediante el combo de <i>Prioridad</i> (Baja, Media, Alta, Crítica) y añada la descripción del daño para el despliegue inmediato de las cuadrillas de ingenieros.</li>
+                                        <li><strong>Título de la Incidencia:</strong> Nombre o descripción breve del problema reportado.</li>
+                                        <li><strong>Estado:</strong> Permite indicar la condición actual de la incidencia.</li>
+                                        <li><strong>Mesa Técnica Responsable:</strong> Mesa técnica encargada de gestionar la incidencia.</li>
+                                        <li><strong>Comunidad Afectada:</strong> Comunidad donde se presenta la situación.</li>
+                                        <li><strong>Tipo de Incidencia:</strong> Clasificación de la incidencia registrada.</li>
+                                        <li><strong>Prioridad:</strong> Nivel de importancia asignado al caso.</li>
+                                        <li><strong>Fecha del Suceso:</strong> Fecha en la que ocurrió la incidencia.</li>
+                                        <li><strong>Descripción Detallada:</strong> Permite registrar información detallada sobre el problema reportado.</li>
                                     </ul>
+                                    <p class="text-secondary">Para registrar una <code>Nueva Incidencia</code> debes completar la información solicitada y presionar el botón <code>Guardar Incidencia</code>.</p>
+                                    <p class="text-secondary">En la gestión de incidencias podrás consultar todas las incidencias registradas dentro del sistema, realizar búsquedas, editar registros existentes o eliminarlos cuando sea necesario.</p>
                                 </div>
 
                                 <div class="tab-pane fade" id="v-pills-user" role="tabpanel">
-                                    <h4 class="fw-bold mb-3 text-primary">Gestión de Usuarios e Identidad</h4>
-                                    <p class="text-secondary leading-relaxed">Permite al administrador auditar el control de accesos, roles y perfiles del personal dentro de la plataforma.</p>
+                                    <h4 class="fw-bold mb-3 text-primary">Módulo de Usuarios</h4>
+                                    <p class="text-secondary leading-relaxed">Este módulo permite administrar los usuarios que tienen acceso al sistema.</p>
                                     <div class="row g-3 text-secondary mb-3">
                                         <div class="col-md-6">
                                             <strong>Información de Perfil requerida:</strong>

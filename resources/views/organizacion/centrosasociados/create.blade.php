@@ -75,7 +75,7 @@
 
         <div class="d-flex justify-content-end gap-2 mt-4">
             <a href="{{ route('centros-asociados.index') }}" class="btn btn-light px-4">Cancelar</a>
-            <button type="submit" class="btn btn-primary px-5" style="background: var(--primary); border: none;">Guardar Registro</button>
+            <button type="submit" class="btn btn-primary px-5" style="background: var(--primary); border: none;">Guardar Centro.</button>
         </div>
     </form>
 </div>
