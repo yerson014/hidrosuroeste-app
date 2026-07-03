@@ -12,6 +12,19 @@
     <form action="{{ route('consejos-comunales.update', $consejo->consejo_comunal_id) }}" method="POST">
         @csrf
         @method('PUT')
+
+        {{-- Bloque de seguridad global para mostrar errores --}}
+        @if ($errors->any())
+            <div class="alert alert-danger shadow-sm border-0 mb-4">
+                <div class="fw-bold mb-1"><i data-lucide="alert-circle" class="me-2 text-danger"></i>Por favor verifique los siguientes campos:</div>
+                <ul class="mb-0 ps-4">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="row g-4">
             <div class="col-md-7">
                 <div class="card shadow-sm border-0 h-100">
@@ -54,7 +67,10 @@
                         </div>
                         <div class="mb-3">
                             <label for="lider_telefono" class="form-label fw-bold">Teléfono de Contacto</label>
-                            <input type="text" name="lider_telefono" id="lider_telefono" class="form-control" placeholder="04XX-XXXXXXX" value="{{ old('lider_telefono', $consejo->lider_telefono) }}">
+                            {{-- Agregada la clase de validación dinámica @error --}}
+                            <input type="text" name="lider_telefono" id="lider_telefono" class="form-control @error('lider_telefono') is-invalid @enderror" placeholder="Ej. 04241234567" value="{{ old('lider_telefono', $consejo->lider_telefono) }}">
+                            {{-- Bloque contenedor para mostrar el error de formato o longitud --}}
+                            @error('lider_telefono') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
                         <div class="alert alert-warning py-2 small mt-3">
                             <i data-lucide="alert-circle" class="me-1" style="width: 14px;"></i>
