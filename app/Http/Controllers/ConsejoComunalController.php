@@ -55,10 +55,14 @@ class ConsejoComunalController extends Controller
                 }),
             ],
             'lider_nombre' => 'nullable|string|max:150',
-            'lider_telefono' => 'nullable|string|max:20',
+            // === VALIDACIÓN STRICTA: Solo números y exactamente 11 dígitos ===
+            'lider_telefono' => 'nullable|numeric|digits:11', 
         ], [
             'nombre.required' => 'El nombre del consejo comunal es obligatorio.',
             'nombre.unique'   => 'Ya existe otro consejo comunal con este nombre en la comunidad seleccionada.',
+            // Mensajes personalizados para el teléfono
+            'lider_telefono.numeric' => 'El teléfono del líder debe contener solo números (sin letras, guiones ni símbolos).',
+            'lider_telefono.digits'  => 'El teléfono del líder debe tener exactamente 11 números (ej. 04241234567).',
         ]);
 
         try {
@@ -101,10 +105,14 @@ class ConsejoComunalController extends Controller
                     }),
             ],
             'lider_nombre' => 'nullable|string|max:150',
-            'lider_telefono' => 'nullable|string|max:20',
+            // === VALIDACIÓN STRICTA: Solo números y exactamente 11 dígitos ===
+            'lider_telefono' => 'nullable|numeric|digits:11', 
         ], [
             'nombre.required' => 'El nombre del consejo comunal es obligatorio.',
             'nombre.unique'   => 'Ya existe otro consejo comunal con este nombre en la comunidad seleccionada.',
+            // Mensajes personalizados para el teléfono
+            'lider_telefono.numeric' => 'El teléfono del líder debe contener solo números (sin letras, guiones ni símbolos).',
+            'lider_telefono.digits'  => 'El teléfono del líder debe tener exactamente 11 números (ej. 04241234567).',
         ]);
 
         try {
