@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Acceso — Hidrosuroeste</title>
+    <link rel="icon" type="image/jpeg" href="{{ asset('images/aEEQCQI7_400x400.jpg') }}?v=1" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -15,7 +16,9 @@
         }
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: 
+                url("{{ asset('assets/aEEQCQI7_400x400.jpg') }}") no-repeat center 20px / 140px 100px, 
+                linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             height: 100vh;
             display: flex;
             align-items: center;
@@ -29,12 +32,14 @@
 
         .login-card {
             background: white;
-            padding: 40px;
+            padding: 25px;
             border-radius: 20px;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
             text-align: center;
+            /* 2) Animación de entrada de 2.5 segundos con desvanecimiento y ascenso suave */
+            animation: fadeInLoad 1.5s ease-out forwards;
         }
         .brand img {
             height: 80px;
@@ -72,6 +77,32 @@
         .footer-links { margin-top: 20px; font-size: 0.85rem; }
         .footer-links a { color: var(--secondary); text-decoration: none; font-weight: 600; }
         .alert { background: #fee2e2; color: #b91c1c; padding: 10px; border-radius: 8px; margin-bottom: 20px; font-size: 0.8rem; }
+
+        /* 1) Ajustes de diseño responsivo optimizados para la vista móvil */
+        @media (max-width: 480px) {
+            .login-card {
+                max-width: 75%; /* Reducido un poco más el ancho para mayor presencia del fondo */
+                padding: 30px 18px; /* Ajuste sutil de los espacios internos */
+            }
+            .brand img {
+                height: 70px; /* Mantiene el logo proporcionado */
+            }
+            h2 {
+                font-size: 1.35rem; /* Título sutilmente equilibrado */
+            }
+        }
+
+        /* Declaración de los fotogramas de la animación de carga */
+        @keyframes fadeInLoad {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -90,7 +121,7 @@
             @csrf
             <div class="form-group">
                 <label>Correo Electrónico</label>
-                <input type="email" name="correo" required placeholder="ejemplo@hidrosuroeste.com">
+                <input type="email" name="correo" required placeholder="ejemplo@gmail.com">
             </div>
             <div class="form-group">
                 <label>Contraseña</label>
