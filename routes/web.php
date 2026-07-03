@@ -120,13 +120,6 @@ Route::middleware(['auth'])->group(function () {
             } catch (\Exception $ex) {}
         }
     
-        // === LÍNEA TEMPORAL PARA BORRAR LA TABLA VIEJA EN EL SERVIDOR ===
-        try {
-            \Illuminate\Support\Facades\DB::statement('DROP TABLE IF EXISTS comunidad CASCADE;');
-        } catch (\Exception $e) {
-            // Si da error porque no existe, no pasa nada, continúa
-        }
-
         // 3. Si no existe comunidad, la creamos con tu estructura exacta de pgAdmin
         if (!\Illuminate\Support\Facades\Schema::hasTable('comunidad')) {
             try {
