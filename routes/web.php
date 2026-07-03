@@ -46,7 +46,7 @@ Route::get('/', function () {
                 'nombre'           => 'Yerson',
                 'apellido'         => 'Camargo',
                 'cedula'           => '30853387',
-                'password'         => \Illuminate\Support\Facades\Hash::make('altavista'), 
+                'password'         => \Illuminate\Support\Facades\Hash::make('altavista56'), 
                 'rol'              => 'Administrador',
                 'fecha_nacimiento' => '2003-09-07',
                 'created_at'       => now(),
