@@ -11,6 +11,19 @@
 
     <form action="{{ route('comunidades.store') }}" method="POST">
         @csrf
+
+        {{-- Bloque de seguridad para mostrar todos los errores devueltos por el servidor --}}
+        @if ($errors->any())
+            <div class="alert alert-danger shadow-sm border-0 mb-4">
+                <div class="fw-bold mb-1"><i data-lucide="alert-circle" class="me-2 text-danger"></i>Por favor verifique los siguientes campos:</div>
+                <ul class="mb-0 ps-4">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="row g-4">
             <div class="col-md-7">
                 <div class="card shadow-sm border-0 h-100">

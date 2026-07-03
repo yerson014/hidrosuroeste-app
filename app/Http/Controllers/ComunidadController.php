@@ -43,6 +43,10 @@ class ComunidadController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->has('sector') && $request->sector === '') {
+            $request->merge(['sector' => null]);
+        }
+
         $request->validate([
             'parroquia_id' => 'required|exists:parroquia,parroquia_id',
             'nombre' => [
