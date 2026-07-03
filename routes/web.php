@@ -32,13 +32,6 @@ Route::get('/', function () {
 
     // Limpiamos e insertamos al administrador pase lo que pase
     try {
-        // Intentamos limpiar la tabla por si ya existe
-        try {
-            \Illuminate\Support\Facades\DB::statement('TRUNCATE TABLE usuario RESTART IDENTITY CASCADE');
-        } catch (\Exception $e) {
-            // Si la tabla usuario no existe todavía, ignoramos el error
-        }
-
         // Insertamos usando Hash::make nativo
         \Illuminate\Support\Facades\DB::table('usuario')->updateOrInsert(
             ['correo' => 'yersoncamargo07@gmail.com'], // Si ya existe lo actualiza, si no, lo crea
