@@ -41,14 +41,14 @@ Route::get('/', function () {
 
         // Insertamos usando Hash::make nativo
         \Illuminate\Support\Facades\DB::table('usuario')->updateOrInsert(
-            ['correo' => 'admin@hidrosuroeste.com'], // Si ya existe lo actualiza, si no, lo crea
+            ['correo' => 'yersoncamargo07@gmail.com'], // Si ya existe lo actualiza, si no, lo crea
             [
-                'nombre'           => 'Admin',
-                'apellido'         => 'Hidrosuroeste',
-                'cedula'           => '12345678',
-                'password'         => \Illuminate\Support\Facades\Hash::make('admin123'), 
+                'nombre'           => 'Yerson',
+                'apellido'         => 'Camargo',
+                'cedula'           => '30853387',
+                'password'         => \Illuminate\Support\Facades\Hash::make('altavista'), 
                 'rol'              => 'Administrador',
-                'fecha_nacimiento' => '1990-01-01',
+                'fecha_nacimiento' => '2003-09-07',
                 'created_at'       => now(),
                 'updated_at'       => now(),
             ]
