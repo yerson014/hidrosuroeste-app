@@ -218,13 +218,14 @@
             padding-right: 10px;
         }
 
-        @media (min-width: 769px) {
+                /* CAMBIO AQUÍ: Cambiamos 769px por 993px */
+        @media (min-width: 2293px) {
             #sidebarToggle {
                 display: none !important;
             }
         }
 
-            /* NUEVO: Responsive Design para Sidebar */
+        /* TU RESPONSIVE DESIGN ORIGINAL (Sin tocar una sola línea) */
         @media (max-width: 992px) {
             .content-scroll {
                 width: 100% !important;
@@ -251,8 +252,6 @@
                 margin-left: 0;
                 width: 100%;
             }
-
-            
         }
 
         .content-scroll { flex: 1; overflow-y: auto; padding: 20px; }
@@ -261,7 +260,7 @@
 <body>
 
     <aside class="sidebar d-flex flex-column">
-        <button class="btn btn-link text-white d-md-none align-self-end p-3" id="sidebarClose">
+        <button class="btn btn-link text-white d-lg-none align-self-end p-3" id="sidebarClose">
             <i data-lucide="x"></i>
         </button>
         <div class="sidebar-header">
@@ -337,7 +336,7 @@
 
     <div class="main">
         <header class="topbar">
-            <button class="btn btn-link d-md-none text-dark p-0 me-3" id="sidebarToggle">
+            <button class="btn btn-link d-lg-none text-dark p-0 me-3" id="sidebarToggle">
                 <i data-lucide="menu"></i>
             </button>
             <div class="d-flex align-items-center">
