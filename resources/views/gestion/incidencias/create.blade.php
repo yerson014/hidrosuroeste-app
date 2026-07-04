@@ -26,6 +26,7 @@
                             <option value="registrada" {{ old('estado') == 'registrada' ? 'selected' : '' }}>Registrada</option>
                             <option value="atendida" {{ old('estado') == 'atendida' ? 'selected' : '' }}>Atendida</option>
                             <option value="resuelta" {{ old('estado') == 'resuelta' ? 'selected' : '' }}>Resuelta</option>
+                            <option value="suspendida" {{ old('estado') == 'suspendida' ? 'selected' : '' }}>Suspendida</option>
                         </select>
                     </div>
 
@@ -59,14 +60,15 @@
                         <label class="form-label fw-bold">Tipo de Incidencia</label>
                         <select name="tipo" class="form-select @error('tipo') is-invalid @enderror">
                             <option value="">Seleccione tipo...</option>
-                            <option value="Fuga" {{ old('tipo') == 'Fuga' ? 'selected' : '' }}>Fuga de Agua</option>
-                            <option value="Agua Potable" {{ old('tipo') == 'Agua Potable' ? 'selected' : '' }}>Agua Potable</option>
-                            <option value="Servicio" {{ old('tipo') == 'Servicio' ? 'selected' : '' }}>Suministro / Servicio</option>
-                            <option value="Aguas Servidas" {{ old('tipo') == 'Aguas Servidas' ? 'selected' : '' }}>Aguas Servidas</option>
-                            <option value="Denuncia" {{ old('tipo') == 'Denuncia' ? 'selected' : '' }}>Denuncia / Toma Ilegal</option>
-                            <option value="Infraestructura" {{ old('tipo') == 'Infraestructura' ? 'selected' : '' }}>Infraestructura / Tuberías</option>
-                            <option value="Calidad" {{ old('tipo') == 'Calidad' ? 'selected' : '' }}>Calidad / Turbidez</option>
-                            <option value="Otro" {{ old('tipo') == 'Otro' ? 'selected' : '' }}>Filtración Externa</option>
+                            <option value="filtracion externa" {{ old('tipo') == 'filtracion externa' ? 'selected' : '' }}>Filtración Externa</option>
+                            <option value="averia de red" {{ old('tipo') == 'averia de red' ? 'selected' : '' }}>Avería de Red</option>
+                            <option value="baja presion / escasez" {{ old('tipo') == 'baja presion / escasez' ? 'selected' : '' }}>Baja Presión / Escasez</option>
+                            <option value="daño de infraestructura" {{ old('tipo') == 'daño de infraestructura' ? 'selected' : '' }}>Daño de Infraestructura</option>
+                            <option value="filtracion / rotura" {{ old('tipo') == 'filtracion / rotura' ? 'selected' : '' }}>Filtración / Rotura</option>
+                            <option value="fuga de agua" {{ old('tipo') == 'fuga de agua' ? 'selected' : '' }}>Fuga de Agua</option>
+                            <option value="suministro" {{ old('tipo') == 'suministro' ? 'selected' : '' }}>Suministro</option>
+                            <option value="aguas servidas" {{ old('tipo') == 'aguas servidas' ? 'selected' : '' }}>Aguas Servidas</option>
+                            <option value="agua potable" {{ old('tipo') == 'agua potable' ? 'selected' : '' }}>Agua Potable</option>
                         </select>
                     </div>
 
@@ -82,7 +84,6 @@
                     <div class="col-md-4">
                         <label class="form-label fw-bold">Fecha del Suceso</label>
                         <input type="date" name="fecha" class="form-control" value="{{ old('fecha', date('Y-m-d')) }}">
-                        
                     </div>
 
                     <div class="col-12">

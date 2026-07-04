@@ -83,14 +83,14 @@ class IncidenciaController extends Controller
             'tipo'            => 'nullable|string|max:100',
             'descripcion'     => 'nullable|string',
             'prioridad'       => 'nullable|string|max:30',
-            'estado'          => 'required|in:registrada,atendida,resuelta',
+            'estado'          => 'required|in:registrada,atendida,resuelta,suspendida', // <-- 'suspendida' agregado aquí
             'fecha'           => 'nullable|date|before_or_equal:today', 
         ], [
             'titulo.required' => 'El título de la incidencia es obligatorio.',
             'mesa_tecnica_id.required' => 'Debe seleccionar una mesa técnica.',
             'comunidad_id.required' => 'Debe seleccionar una comunidad.',
-            'fecha.date' => 'Por favor, ingresa una fecha válida.', // Mensaje modificado
-            'fecha.before_or_equal' => 'No puedes ingresar fechas futuras. Por favor, selecciona una fecha válida.', // Mensaje de advertencia
+            'fecha.date' => 'Por favor, ingresa una fecha válida.', 
+            'fecha.before_or_equal' => 'No puedes ingresar fechas futuras. Por favor, selecciona una fecha válida.', 
         ]);
 
         try {
@@ -141,14 +141,14 @@ class IncidenciaController extends Controller
             'mesa_tecnica_id' => 'required|exists:mesa_tecnica,mesa_tecnica_id',
             'comunidad_id'    => 'required|exists:comunidad,comunidad_id',
             'titulo'          => 'required|string|max:150',
-            'estado'          => 'required|in:registrada,atendida,resuelta',
+            'estado'          => 'required|in:registrada,atendida,resuelta,suspendida', // <-- 'suspendida' agregado aquí
             'tipo'            => 'nullable|string|max:100',
             'prioridad'       => 'nullable|string|max:30',
             'fecha'           => 'nullable|date|before_or_equal:today', 
             'descripcion'     => 'nullable|string',
         ], [
-            'fecha.date' => 'Por favor, ingresa una fecha válida.', // Mensaje modificado
-            'fecha.before_or_equal' => 'No puedes ingresar fechas futuras. Por favor, selecciona una fecha válida.', // Mensaje de advertencia
+            'fecha.date' => 'Por favor, ingresa una fecha válida.', 
+            'fecha.before_or_equal' => 'No puedes ingresar fechas futuras. Por favor, selecciona una fecha válida.', 
         ]);
 
         try {

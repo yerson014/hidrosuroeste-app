@@ -106,8 +106,10 @@
                                 <span class="badge bg-info text-white">Registrada</span>
                             @elseif($incidencia->estado == 'atendida')
                                 <span class="badge bg-warning text-dark">Atendida</span>
-                            @else
+                            @elseif($incidencia->estado == 'resuelta')
                                 <span class="badge bg-success text-white">Resuelta</span>
+                            @else
+                                <span class="badge bg-secondary text-white">Suspendida</span>
                             @endif
                         </td>
                         <td>

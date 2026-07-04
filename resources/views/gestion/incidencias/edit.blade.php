@@ -28,6 +28,7 @@
                             <option value="registrada" {{ old('estado', $incidencia->estado) == 'registrada' ? 'selected' : '' }}>Registrada</option>
                             <option value="atendida" {{ old('estado', $incidencia->estado) == 'atendida' ? 'selected' : '' }}>Atendida</option>
                             <option value="resuelta" {{ old('estado', $incidencia->estado) == 'resuelta' ? 'selected' : '' }}>Resuelta</option>
+                            <option value="suspendida" {{ old('estado', $incidencia->estado) == 'suspendida' ? 'selected' : '' }}>Suspendida</option>
                         </select>
                     </div>
 
@@ -56,11 +57,15 @@
                     <div class="col-md-4">
                         <label class="form-label fw-bold">Tipo</label>
                         <select name="tipo" class="form-select">
-                            <option value="Fuga" {{ old('tipo', $incidencia->tipo) == 'Fuga' ? 'selected' : '' }}>Fuga de Agua</option>
-                            <option value="Agua Potable" {{ old('tipo', $incidencia->tipo) == 'Agua Potable' ? 'selected' : '' }}>Agua Potable</option>
-                            <option value="Aguas Servidas" {{ old('tipo', $incidencia->tipo) == 'Aguas Servidas' ? 'selected' : '' }}>Aguas Servidas</option>
-                            <option value="Infraestructura" {{ old('tipo', $incidencia->tipo) == 'Infraestructura' ? 'selected' : '' }}>Infraestructura</option>
-                            <option value="Otro" {{ old('tipo', $incidencia->tipo) == 'Otro' ? 'selected' : '' }}>Otro</option>
+                            <option value="filtracion externa" {{ old('tipo', $incidencia->tipo) == 'filtracion externa' ? 'selected' : '' }}>Filtración Externa</option>
+                            <option value="averia de red" {{ old('tipo', $incidencia->tipo) == 'averia de red' ? 'selected' : '' }}>Avería de Red</option>
+                            <option value="baja presion / escasez" {{ old('tipo', $incidencia->tipo) == 'baja presion / escasez' ? 'selected' : '' }}>Baja Presión / Escasez</option>
+                            <option value="daño de infraestructura" {{ old('tipo', $incidencia->tipo) == 'daño de infraestructura' ? 'selected' : '' }}>Damage de Infraestructura</option>
+                            <option value="filtracion / rotura" {{ old('tipo', $incidencia->tipo) == 'filtracion / rotura' ? 'selected' : '' }}>Filtración / Rotura</option>
+                            <option value="fuga de agua" {{ old('tipo', $incidencia->tipo) == 'fuga de agua' ? 'selected' : '' }}>Fuga de Agua</option>
+                            <option value="suministro" {{ old('tipo', $incidencia->tipo) == 'suministro' ? 'selected' : '' }}>Suministro</option>
+                            <option value="aguas servidas" {{ old('tipo', $incidencia->tipo) == 'aguas servidas' ? 'selected' : '' }}>Aguas Servidas</option>
+                            <option value="agua potable" {{ old('tipo', $incidencia->tipo) == 'agua potable' ? 'selected' : '' }}>Agua Potable</option>
                         </select>
                     </div>
 
